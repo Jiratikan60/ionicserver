@@ -15,21 +15,20 @@ if ($connect->connect_error) {
     die("การเชื่อมต่อผิดพลาด : " . $connect->connect_error);
 }
 
+$id = $_GET["id"];
 
-    $id = $_GET["id"];
+$sql = "delete from customers where id = $id";
 
-    $sql = "delete from customers where id = $id";
+// $result = $connect->query($sql);
 
-    // $result = $connect->query($sql);
+if ($connect->query($sql) === true) {
+    $connect->close();
+    return true;
 
-    if ($connect->query($sql) === true) {
-        $connect->close();
-        return true;
+} else {
+    $connect->close();
+    return $connect->error;
 
-    } else {
-        $connect->close();
-        return $connect->error;
-    
     $connect->close();
 
 }
